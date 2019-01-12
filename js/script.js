@@ -25,7 +25,13 @@ function showPage () {
     const wholePage = document.querySelector('.page');
     let pageList = document.createElement('ol');
     pageList.classList.add('pagination');
-    for
+    for (i = 0; i < studentPages; i++){
+      let pageButton = document.createElement('li');
+      let pageLink = document.createElement('a');
+      pageLink.innerHTML = i + 1;
+      pageButton.appendChild(pageLink);
+      pageList.appendChild(pageButton);
+    }
     wholePage.appendChild(pageList);
 
     // var pageList = wholePage.appendChild(``)
