@@ -23,7 +23,6 @@ FSJS project 2 - List Filter and Pagination
 /*** 
    Create the `showPage` function to hide all of the items in the 
    list except for the ten you want to show.
-
    Pro Tips: 
      - Keep in mind that with a list of 54 students, the last page 
        will only display four.
@@ -35,13 +34,26 @@ FSJS project 2 - List Filter and Pagination
        "invoke" the function 
 ***/
 
+const showPage = (min,max) => {
+  let studentsList = document.querySelectorAll('.student-item');
+  studentsList.forEach(student => student.style.visibility = "hidden")
+              .filter((student,index) => min < index < max)
+              .forEach(student => student.style.visibility = "");
+};
 
-
+const numberPages = (studentsList) => Math.ceil((studentsList.length) / 10);
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
+
+const appendPageLinks = () => {
+  let listButton = document.createElement("ol");
+  listButton.className = 'pagination';
+  listButton.innerHTML = 'this created div contains class while created!!!';
+  document.querySelector('.page').appendChild(listButton);
+}
 
 
 
