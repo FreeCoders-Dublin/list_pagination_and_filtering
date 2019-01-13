@@ -17,13 +17,12 @@ FSJS project 2 - List Filter and Pagination
    scoped to that function.
 ***/
 const studentList = document.querySelectorAll('.student-item');
-let studentPages = Math.ceil(studentList.length / 10);
+const studentPages = Math.ceil(studentList.length / 10);
 const wholePage = document.querySelector('div.page');
 
 function showPage () {
 
   if (studentPages > 0) {
-
     let pageList = document.createElement('ol');
     pageList.classList.add('pagination');
     for (i = 0; i < studentPages; i++){
@@ -34,9 +33,8 @@ function showPage () {
       pageList.appendChild(pageButton);
     }
     wholePage.appendChild(pageList);
-
-  } else if {
-
+  } else {
+    wholePage.innerHTML = '<h1>There are no students</h1>';
   }
 
   for (let i = 0; i < studentList.length; i++) {
