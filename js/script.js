@@ -40,7 +40,7 @@ let activePage = 1;
 function showPage (activePage) {
   for (let i = 0; i < studentList.length; i++) {
   studentList[i].style.display = 'none';
-    if (i < (activePage * 10)){
+  if (i < activePage * 10 && i >= (activePage * 10) - 10) {
   studentList[i].style.display = 'block';
     }
   }
