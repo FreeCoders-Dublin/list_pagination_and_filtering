@@ -19,32 +19,9 @@ FSJS project 2 - List Filter and Pagination
 const studentList = document.querySelectorAll('.student-item');
 const studentPages = Math.ceil(studentList.length / 10);
 const wholePage = document.querySelector('div.page');
+let activePage = 1;
 
-function showPage () {
 
-  if (studentPages > 0) {
-    let pageList = document.createElement('ol');
-    pageList.classList.add('pagination');
-    for (i = 0; i < studentPages; i++){
-      let pageButton = document.createElement('li');
-      let pageLink = document.createElement('a');
-      pageLink.innerHTML = i + 1;
-      pageButton.appendChild(pageLink);
-      pageList.appendChild(pageButton);
-    }
-    wholePage.appendChild(pageList);
-  } else {
-    wholePage.innerHTML = '<h1>There are no students</h1>';
-  }
-
-  for (let i = 0; i < studentList.length; i++) {
-    if (i > 9){
-    studentList[i].classList.add('hide');
-    }
-  }
-};
-
-showPage();
 
 /***
    Create the `showPage` function to hide all of the items in the
@@ -60,17 +37,43 @@ showPage();
        that will be passed into the parens later when you call or
        "invoke" the function
 ***/
+function showPage (activePage) {
+  for (let i = 0; i < studentList.length; i++) {
+  studentList[i].style.display = 'none';
+    if (i < (activePage * 10)){
+  studentList[i].style.display = 'block';
+    }
+  }
+};
 
-
-
+showPage (activePage);
 
 /***
    Create the `appendPageLinks function` to generate, append, and add
    functionality to the pagination buttons.
 ***/
+const appendPageLinks = () => {
+  let pageList = document.createElement('ol');
+  pageList.classList.add('pagination');
+  for (let i = 0; i < studentPages; i++){
+    let pageButton = document.createElement('li');
+    let pageLink = document.createElement('a');
+    pageLink.innerHTML = i + 1;
+    pageLink.addEventListener ('click', (event) => {
+      console.log(i);
+      event.target.classList.add('active');
+      activePage = (i + 1);
+      console.log(activePage);
+      showPage(activePage);
+    }, false);
+    pageButton.appendChild(pageLink);
+    pageList.appendChild(pageButton);
+  }
+  wholePage.appendChild(pageList);
+}
 
-
-
+appendPageLinks ();
+showPage(activePage);
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
