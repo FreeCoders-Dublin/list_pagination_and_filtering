@@ -67,8 +67,12 @@ const appendPageLinks = () => {
   }
   pageList.addEventListener ('click', (event) => {
     if (event.target.tagName === 'A') {
+      pageList.querySelectorAll('a')
+      .forEach ( (e) => {
+        e.classList.remove('active');
+      });
       event.target.classList.add('active');
-      activePage = event.indexOf(target) + 1;
+      activePage = event.target.innerHTML;
       showPage(activePage);
     }
   }, false);
