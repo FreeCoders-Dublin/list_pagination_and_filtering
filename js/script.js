@@ -37,7 +37,7 @@ let activePage = 1;
        that will be passed into the parens later when you call or
        "invoke" the function
 ***/
-function showPage (activePage) {
+const showPage = (activePage) => {
   for (let i = 0; i < studentList.length; i++) {
   studentList[i].style.display = 'none';
   if (i < activePage * 10 && i >= (activePage * 10) - 10) {
@@ -59,21 +59,19 @@ const appendPageLinks = () => {
     let pageButton = document.createElement('li');
     let pageLink = document.createElement('a');
     pageLink.innerHTML = i + 1;
-    pageLink.addEventListener ('click', (event) => {
-      console.log(i);
-      event.target.classList.add('active');
-      activePage = (i + 1);
-      console.log(activePage);
-      showPage(activePage);
-    }, false);
     pageButton.appendChild(pageLink);
     pageList.appendChild(pageButton);
+    pageLink.addEventListener ('click', (event) => {
+
+      event.target.classList.add('active');
+      activePage = (i + 1);
+      showPage(activePage);
+    }, false);
   }
   wholePage.appendChild(pageList);
 }
 
 appendPageLinks ();
-showPage(activePage);
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
