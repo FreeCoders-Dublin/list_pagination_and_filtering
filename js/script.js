@@ -18,7 +18,7 @@ FSJS project 2 - List Filter and Pagination
 ***/
 const studentList = document.querySelectorAll('.student-item');
 const studentPages = Math.ceil(studentList.length / 10);
-const wholePage = document.querySelector('div.page');
+const divPage = document.querySelector('div.page');
 let activePage = 1;
 
 
@@ -75,16 +75,44 @@ const appendPageLinks = () => {
         e.classList.remove('active');
       });
       event.target.classList.add('active');
-      event.target.setAttribute("href", "#");
+      event.target.setAttribute('href', '#');
       activePage = event.target.innerHTML;
       showPage(activePage);
     }
   }, false);
 
-  wholePage.appendChild(pageList);
+  divPage.appendChild(pageList);
 }
 
 appendPageLinks ();
+
+
+// Search engine
+const searchBar = document.createElement ('div');
+searchBar.classList.add('student-search');
+const searchInput = document.createElement('input');
+searchInput.setAttribute('placeholder', 'Search for students...');
+searchBar.appendChild(searchInput);
+document.querySelector('.page-header').appendChild(searchBar);
+
+let userInput = '';
+
+searchInput.addEventListener ('keydown', (input) => {
+  // userInput += input.key;
+  if (input.cancelable === true ){
+    userInput += input.key;
+    console.log(userInput);
+  } else if (input.keyCode == 8) {
+      userInput -= userInput.substring(0, userInput.length - 1);
+      console.log(userInput);
+    } else {
+    }
+  // } else {
+  //   showPage (activePage)
+  // }
+}, false);
+
+const searchStudents = (userInput) => {}
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
