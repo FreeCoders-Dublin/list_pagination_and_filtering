@@ -76,6 +76,7 @@ const appendPageLinks = () => {
         e.classList.remove('active');
       });
       event.target.classList.add('active');
+      event.target.setAttribute("href", "#");
       activePage = event.target.innerHTML;
       showPage(activePage);
     }
