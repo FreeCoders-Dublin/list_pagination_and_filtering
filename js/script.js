@@ -18,7 +18,7 @@ FSJS project 2 - List Filter and Pagination
 ***/
 const studentList = document.querySelectorAll('.student-item');
 const studentPages = Math.ceil(studentList.length / 10);
-
+let pageList = document.querySelector('.pagination');
 const divPage = document.querySelector('div.page');
 let activePage = 1;
 
@@ -55,7 +55,7 @@ showPage (activePage);
    functionality to the pagination buttons.
 ***/
 const appendPageLinks = (studentPages) => {
-  let pageList = document.createElement('ol');
+  pageList = document.createElement('ol');
   pageList.classList.add('pagination');
 
   for (let i = 0; i < studentPages; i++){
@@ -100,6 +100,7 @@ let userInput = '';
 
 searchInput.addEventListener ('keyup', () => {
   if (searchInput.value !== '') {
+    pageList.style.display = 'none';
     for (let i = 0; i < studentList.length; i++) {
       studentList[i].style.display = 'none';
     }
