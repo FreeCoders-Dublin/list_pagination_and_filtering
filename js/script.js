@@ -18,6 +18,7 @@ FSJS project 2 - List Filter and Pagination
 ***/
 const studentList = document.querySelectorAll('.student-item');
 const studentPages = Math.ceil(studentList.length / 10);
+
 const divPage = document.querySelector('div.page');
 let activePage = 1;
 
@@ -53,7 +54,7 @@ showPage (activePage);
    Create the `appendPageLinks function` to generate, append, and add
    functionality to the pagination buttons.
 ***/
-const appendPageLinks = () => {
+const appendPageLinks = (studentPages) => {
   let pageList = document.createElement('ol');
   pageList.classList.add('pagination');
 
@@ -97,22 +98,33 @@ document.querySelector('.page-header').appendChild(searchBar);
 
 let userInput = '';
 
-searchInput.addEventListener ('keydown', (input) => {
-  // userInput += input.key;
-  if (input.cancelable === true ){
-    userInput += input.key;
-    console.log(userInput);
-  } else if (input.keyCode == 8) {
-      userInput -= userInput.substring(0, userInput.length - 1);
-      console.log(userInput);
-    } else {
+searchInput.addEventListener ('keyup', () => {
+  if (searchInput.value !== '') {
+    for (let i = 0; i < studentList.length; i++) {
+      studentList[i].style.display = 'none';
     }
-  // } else {
-  //   showPage (activePage)
-  // }
+  } else {
+    showPage (activePage);
+  }
 }, false);
+//   // userInput += input.key;
+//   if ( input.code >= '' ){
+//     userInput += input.key;
+//     console.log(userInput);
+//  if (input.key == 'Backspace') {
+//     console.log('BACKSPACE');
+//   }
+//   // else if (input.keyCode == 8) {
+//   //     userInput -= userInput.substring(0, userInput.length - 1);
+//   //     console.log(userInput);
+//   //   } else {
+//   //   }
+//   // } else {
+//   //   showPage (activePage)
+//   // }
+// }, false);
 
-const searchStudents = (userInput) => {}
+// const searchStudents = (userInput) => {}
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
