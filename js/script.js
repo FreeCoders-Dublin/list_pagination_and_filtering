@@ -53,21 +53,26 @@ showPage (activePage);
    functionality to the pagination buttons.
 ***/
 const appendPageLinks = () => {
+
   let pageList = document.createElement('ol');
+
   pageList.classList.add('pagination');
+
   for (let i = 0; i < studentPages; i++){
     let pageButton = document.createElement('li');
     let pageLink = document.createElement('a');
     pageLink.innerHTML = i + 1;
     pageButton.appendChild(pageLink);
     pageList.appendChild(pageButton);
-    pageLink.addEventListener ('click', (event) => {
-
-      event.target.classList.add('active');
-      activePage = (i + 1);
-      showPage(activePage);
-    }, false);
   }
+  pageList.addEventListener ('click', (event) => {
+    if (event.target.tagName === 'A') {
+      event.target.classList.add('active');
+      activePage = event.indexOf(target) + 1;
+      showPage(activePage);
+    }
+  }, false);
+
   wholePage.appendChild(pageList);
 }
 
