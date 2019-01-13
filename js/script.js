@@ -62,9 +62,13 @@ const appendPageLinks = () => {
     let pageButton = document.createElement('li');
     let pageLink = document.createElement('a');
     pageLink.innerHTML = i + 1;
+    if (pageLink.innerHTML == activePage){
+      pageLink.classList.add('active');
+    }
     pageButton.appendChild(pageLink);
     pageList.appendChild(pageButton);
   }
+
   pageList.addEventListener ('click', (event) => {
     if (event.target.tagName === 'A') {
       pageList.querySelectorAll('a')
