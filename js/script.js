@@ -5,7 +5,6 @@ FSJS project 2 - List Filter and Pagination
    
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
-
 /*** 
    Add your global variables that store the DOM elements you will 
    need to reference and/or manipulate. 
@@ -17,8 +16,9 @@ FSJS project 2 - List Filter and Pagination
    scoped to that function.
 ***/
 
-
-
+let studentList = document.querySelectorAll('.student-item');
+let visiblePage = 1;
+let numberPages = Math.ceil((studentList.length) / 10);
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -35,16 +35,46 @@ FSJS project 2 - List Filter and Pagination
        "invoke" the function 
 ***/
 
+function showPage(visiblePage) {
+   for (i=0; i <studentList.length; i++) {
+      if (i < visiblePage * 10 && i >= (visiblePage * 10) - 10) {
+      studentList[i].style.display = '';
+   }  else {
+      studentList[i].style.display = 'none';
+   }
+ }
+};
 
-
+showPage(visiblePage);
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
+const appendPageLinks = (pages) => {
+   let listButtons = document.createElement('ol');
+   listButtons.className = 'pagination';
+   var counter = 0;
+   do {
+   counter ++;
+   let li = document.createElement('li');
+   li.innerHTML = `<a href='#'>${counter}</a>`;
+   listButtons.appendChild(li); 
+   } while (counter < pages) 
 
+   document.querySelector('.page').appendChild(listButtons);
+}
 
+appendPageLinks(numberPages);
+document.querySelector('a').className = 'active';
 
-
+document.querySelectorAll('a').forEach(button => button.addEventListener(
+   'click', (event) => {
+   document.querySelectorAll('a').forEach(button => button.classList.remove('active'));
+   visiblePage = event.target.innerText;
+   showPage(visiblePage);
+   event.target.className = 'active';
+   }
+));
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
