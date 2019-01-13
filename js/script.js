@@ -39,9 +39,10 @@ let activePage = 1;
 ***/
 const showPage = (activePage) => {
   for (let i = 0; i < studentList.length; i++) {
-  studentList[i].style.display = 'none';
-  if (i < activePage * 10 && i >= (activePage * 10) - 10) {
-  studentList[i].style.display = 'block';
+    studentList[i].style.display = 'none';
+    if (i < activePage * 10 && i >= (activePage * 10) - 10) {
+      studentList[i].style.display = 'block';
+      studentList[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
     }
   }
 };
@@ -53,9 +54,7 @@ showPage (activePage);
    functionality to the pagination buttons.
 ***/
 const appendPageLinks = () => {
-
   let pageList = document.createElement('ol');
-
   pageList.classList.add('pagination');
 
   for (let i = 0; i < studentPages; i++){
