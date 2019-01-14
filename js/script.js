@@ -3,7 +3,8 @@ Luca Tardito
 FSJS project 2 - List Filter and Pagination
 ******************************************/
 
-let studentsList = document.querySelectorAll('.student-item');
+const studentsList = document.querySelectorAll('.student-item');
+const numberPages =  Math.ceil((studentsList.length) / 10);
 
 // input: 2 numbers - output: none - functionality: it hides students not in the range min,max
 const showPage = (min,max) => {
@@ -13,13 +14,7 @@ const showPage = (min,max) => {
   .forEach(student => student.style.display = 'none');
 };
 
-const numberPages =  Math.ceil((studentsList.length) / 10);
-
-/*** 
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
-***/
-
+// input: 2 numbers - output: none - functionality: it hides students not in the range min,max
 const appendPageLinks = (pages) => {
   let listButtons = document.createElement("ol");
   listButtons.className = 'pagination';
@@ -75,5 +70,29 @@ const searchInput = () => {
 }
 
 searchInput();
+
+const searchName = () => {
+  document.querySelector('button').addEventListener('click',() => {
+    let inputValue = document.querySelector('input').value;
+    studentsList.forEach((student) => {
+      if(student.querySelector('h3').innerText.includes(inputValue)) {
+        student.style.display = '';
+      } else {
+        student.style.display = 'none';
+      }
+    });
+  });
+  document.addEventListener('keyup',() => {
+    let inputValue = document.querySelector('input').value;
+    studentsList.forEach((student) => {
+      if(student.querySelector('h3').innerText.includes(inputValue)) {
+        student.style.display = '';
+      } else {
+        student.style.display = 'none';
+      }
+    });
+  });
+}
+
 // setUp();
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
