@@ -63,10 +63,17 @@ document.querySelectorAll('a').forEach(button => button.addEventListener(
 const setUp = () => {
   appendPageLinks(numberPages);
   showPage(0, 10);
-
+  
 }
 
+const searchInput = () => {
+  let searchField = document.createElement('div');
+  searchField.className = 'student-search';
+  searchField.innerHTML = `<input placeholder="Search for students...">
+                          <button>Search</button>`;
+  document.querySelector('.page-header').appendChild(searchField);
+}
 
-
+searchInput();
 // setUp();
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
