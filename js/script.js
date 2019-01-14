@@ -72,12 +72,12 @@ const showPage = (activePage) => {
   // console.log(userInput);
   for (let i = 0; i < studentList.length; i++) {
     let studentName = document.querySelectorAll('.student-details h3')[i].innerText;
+    studentList[i].style.display = 'none';
     if (i < activePage * 10 && i >= (activePage * 10) - 10 && studentName.includes(userInput)) {
       studentList[i].style.display = 'block';
       studentList[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
     } else {
       console.log(userInput);
-      studentList[i].style.display = 'none';
     }
   }
 };
