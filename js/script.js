@@ -28,12 +28,12 @@ const appendPageLinks = (pages, studentsList) => {
   let listButtons = document.createElement("ol");
   listButtons.className = 'pagination';
   var counter = 0;
-  do{
+  while(counter < pages) {
   counter ++;
   let li = document.createElement("li");
   li.innerHTML = `<a href="#">${counter}</a>`;
   listButtons.appendChild(li);
-  } while(counter < pages);
+  };
   document.querySelector('.page').appendChild(listButtons);
   // it reacts moving the active class to the pressed button
   document.querySelectorAll('a').forEach(button => button.addEventListener(
