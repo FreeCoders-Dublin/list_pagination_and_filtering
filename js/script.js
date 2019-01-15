@@ -75,12 +75,16 @@ const showPage = () => {
 
   let visibleStudents = document.querySelectorAll('li.visible');
 
-  for (let i = 0; i < visibleStudents.length; i++) {
-    if (i < activePage * 10 && i >= (activePage * 10) - 10) {
-      visibleStudents[i].style.display = 'block';
-      visibleStudents[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
-    }
-  };
+  if ( visibleStudents.length > 0 ) {
+    for (let i = 0; i < visibleStudents.length; i++) {
+      if (i < activePage * 10 && i >= (activePage * 10) - 10) {
+        visibleStudents[i].style.display = 'block';
+        visibleStudents[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
+      }
+    };
+  } else {
+
+  }
 
   studentPages = Math.ceil(visibleStudents.length / 10);
 };
