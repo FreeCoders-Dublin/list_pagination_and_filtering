@@ -2,28 +2,17 @@
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
-
-// Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
-
-
-/***
-   Add your global variables that store the DOM elements you will
-   need to reference and/or manipulate.
-
-   But be mindful of which variables should be global and which
-   should be locally scoped to one of the two main functions you're
-   going to create. A good general rule of thumb is if the variable
-   will only be used inside of a function, then it can be locally
-   scoped to that function.
-***/
+// Elements in HTML
 let allStudents = document.querySelectorAll('.student-item');
-const studentPages = Math.ceil(allStudents.length / 10);
 let studentList = document.querySelector('.student-list');
 let pageList = document.querySelector('.pagination');
 const divPage = document.querySelector('div.page');
-let activePage = 1;
 const studentNames = document.querySelectorAll('.student-details h3');
 const studentEmails = document.querySelectorAll('.student-details .email');
+
+// Global Variables
+let studentPages = Math.ceil(allStudents.length / 10);
+let activePage = 1;
 
 // Search engine
 const searchBar = document.createElement ('div');
@@ -38,7 +27,7 @@ let userInput = searchInput.value.toLowerCase();
 
 
 // Page Link Creation
-const appendPageLinks = (studentPages) => {
+const appendPageLinks = () => {
   pageList = document.createElement('ol');
   pageList.classList.add('pagination');
 
@@ -61,23 +50,22 @@ const appendPageLinks = (studentPages) => {
       });
       event.target.classList.add('active');
       activePage = event.target.innerHTML;
-      showPage(activePage, allStudents);
+      showPage();
     }
   }, false);
   divPage.appendChild(pageList);
 };
 
 // Append Pages
-appendPageLinks (studentPages);
+appendPageLinks ();
 
 
 // Add students to page function
-const showPage = (activePage, allStudents) => {
+const showPage = () => {
+let userInput = searchInput.value.toLowerCase();
   for (let i = 0; i < allStudents.length; i++) {
     let studentName = studentNames[i].innerText;
     let studentEmail = studentEmails[i].innerText;
-    let userInput = searchInput.value.toLowerCase();
-    console.log(userInput);
     if (studentName.includes(userInput) || studentEmail.includes(userInput)) {
       allStudents[i].classList.add('visible')
     } else if (allStudents[i].classList.contains('visible')) {
@@ -85,23 +73,25 @@ const showPage = (activePage, allStudents) => {
     }
     allStudents[i].style.display = 'none';
   }
+
   let visibleStudents = document.querySelectorAll('li.visible');
+
   for (let i = 0; i < visibleStudents.length; i++) {
     if (i < activePage * 10 && i >= (activePage * 10) - 10) {
       visibleStudents[i].style.display = 'block';
       visibleStudents[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
     }
   }
+  studentPages = Math.ceil(visibleStudents.length / 10);
 };
-showPage (activePage, allStudents);
+showPage ();
 
 
-searchInput.addEventListener ('keyup', (foundStudents) => {
-  if (userInput !== '') {
-    showPage (activePage, allStudents);
-  } else {
-    showPage (activePage, allStudents);
-  }
+searchInput.addEventListener ('keyup', () => {
+    activePage = 1;
+    showPage ();
+    divPage.removeChild(pageList);
+    appendPageLinks ();
 }, false);
 
 
