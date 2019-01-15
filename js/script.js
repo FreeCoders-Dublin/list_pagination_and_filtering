@@ -67,16 +67,15 @@ const showPage = () => {
   const studentEmails = document.querySelectorAll('.student-details .email');
   const studentJoinDates = document.querySelectorAll('.date');
   userInput = searchInput.value.toLowerCase();
+
   for (let i = 0; i < allStudents.length; i++) {
-    let studentName = studentNames[i].innerText;
-    let studentEmail = studentEmails[i].innerText;
-    if (studentName.includes(userInput) || studentEmail.includes(userInput)) {
+    if (studentNames[i].innerText.includes(userInput) || studentEmails[i].innerText.includes(userInput) || studentJoinDates[i].innerText.includes(userInput)) {
       allStudents[i].classList.add('visible')
     } else if (allStudents[i].classList.contains('visible')) {
       allStudents[i].classList.remove('visible')
     }
     allStudents[i].style.display = 'none';
-  }
+  };
 
   let visibleStudents = document.querySelectorAll('li.visible');
 
@@ -85,9 +84,11 @@ const showPage = () => {
       visibleStudents[i].style.display = 'block';
       visibleStudents[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
     }
-  }
+  };
+
   studentPages = Math.ceil(visibleStudents.length / 10);
 };
+
 showPage ();
 
 
@@ -97,6 +98,3 @@ searchInput.addEventListener ('keyup', () => {
     divPage.removeChild(pageList);
     appendPageLinks ();
 }, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
