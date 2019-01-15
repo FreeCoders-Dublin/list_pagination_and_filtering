@@ -16,11 +16,14 @@ FSJS project 2 - List Filter and Pagination
    will only be used inside of a function, then it can be locally
    scoped to that function.
 ***/
-let studentList = document.querySelectorAll('.student-item');
-const studentPages = Math.ceil(studentList.length / 10);
+let allStudents = document.querySelectorAll('.student-item');
+const studentPages = Math.ceil(allStudents.length / 10);
+let studentList = document.querySelector('.student-list');
 let pageList = document.querySelector('.pagination');
 const divPage = document.querySelector('div.page');
 let activePage = 1;
+const studentNames = document.querySelectorAll('.student-details h3');
+const studentEmails = document.querySelectorAll('.student-details .email');
 
 // Search engine
 const searchBar = document.createElement ('div');
@@ -50,7 +53,6 @@ const appendPageLinks = (studentPages) => {
     pageButton.appendChild(pageLink);
     pageList.appendChild(pageButton);
   }
-
   pageList.addEventListener ('click', (event) => {
     if (event.target.tagName === 'A') {
       pageList.querySelectorAll('a')
@@ -59,35 +61,46 @@ const appendPageLinks = (studentPages) => {
       });
       event.target.classList.add('active');
       activePage = event.target.innerHTML;
-      showPage(activePage, studentList);
+      showPage(activePage, allStudents);
     }
   }, false);
-
   divPage.appendChild(pageList);
 };
 
+// Append Pages
 appendPageLinks (studentPages);
 
-const showPage = (activePage, studentList) => {
-  for (let i = 0; i < studentList.length; i++) {
-    studentList[i].style.display = 'none';
-    let studentName = document.querySelectorAll('.student-details h3')[i].innerText;
-    if (i < activePage * 10 && i >= (activePage * 10) - 10 && studentName.includes(userInput)) {
-      studentList[i].style.display = 'block';
-      studentList[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
+
+// Add students to page function
+const showPage = (activePage, allStudents) => {
+  for (let i = 0; i < allStudents.length; i++) {
+    let studentName = studentNames[i].innerText;
+    let studentEmail = studentEmails[i].innerText;
+    let userInput = searchInput.value.toLowerCase();
+    console.log(userInput);
+    if (studentName.includes(userInput) || studentEmail.includes(userInput)) {
+      allStudents[i].classList.add('visible')
+    } else if (allStudents[i].classList.contains('visible')) {
+      allStudents[i].classList.remove('visible')
+    }
+    allStudents[i].style.display = 'none';
+  }
+  let visibleStudents = document.querySelectorAll('li.visible');
+  for (let i = 0; i < visibleStudents.length; i++) {
+    if (i < activePage * 10 && i >= (activePage * 10) - 10) {
+      visibleStudents[i].style.display = 'block';
+      visibleStudents[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
     }
   }
 };
-showPage (activePage, studentList);
+showPage (activePage, allStudents);
 
 
 searchInput.addEventListener ('keyup', (foundStudents) => {
-  userInput = searchInput.value.toLowerCase();
   if (userInput !== '') {
-    if
-    showPage (activePage, studentList);
+    showPage (activePage, allStudents);
   } else {
-    showPage (activePage, studentList);
+    showPage (activePage, allStudents);
   }
 }, false);
 
