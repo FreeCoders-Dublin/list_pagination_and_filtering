@@ -66,10 +66,9 @@ const appendPageLinks = (studentPages) => {
   divPage.appendChild(pageList);
 };
 
-
+appendPageLinks (studentPages);
 
 const showPage = (activePage) => {
-  // console.log(userInput);
   for (let i = 0; i < studentList.length; i++) {
     let studentName = document.querySelectorAll('.student-details h3')[i].innerText;
     studentList[i].style.display = 'none';
@@ -82,7 +81,7 @@ const showPage = (activePage) => {
   }
 };
 showPage (activePage);
-appendPageLinks (studentPages);
+
 
 searchInput.addEventListener ('keyup', (foundStudents) => {
   userInput = searchInput.value.toLowerCase();
