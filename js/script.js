@@ -59,7 +59,7 @@ const appendPageLinks = (studentPages) => {
       });
       event.target.classList.add('active');
       activePage = event.target.innerHTML;
-      showPage(activePage);
+      showPage(activePage, studentList);
     }
   }, false);
 
@@ -68,31 +68,26 @@ const appendPageLinks = (studentPages) => {
 
 appendPageLinks (studentPages);
 
-const showPage = (activePage) => {
+const showPage = (activePage, studentList) => {
   for (let i = 0; i < studentList.length; i++) {
-    let studentName = document.querySelectorAll('.student-details h3')[i].innerText;
     studentList[i].style.display = 'none';
+    let studentName = document.querySelectorAll('.student-details h3')[i].innerText;
     if (i < activePage * 10 && i >= (activePage * 10) - 10 && studentName.includes(userInput)) {
       studentList[i].style.display = 'block';
       studentList[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
-    } else {
-      console.log(userInput);
     }
   }
 };
-showPage (activePage);
+showPage (activePage, studentList);
 
 
 searchInput.addEventListener ('keyup', (foundStudents) => {
   userInput = searchInput.value.toLowerCase();
   if (userInput !== '') {
-    showPage (activePage);
-    userInput = searchInput.value.toLowerCase();
-    console.log(userInput);
+    if
+    showPage (activePage, studentList);
   } else {
-    showPage (activePage);
-    console.log(userInput);
-
+    showPage (activePage, studentList);
   }
 }, false);
 
