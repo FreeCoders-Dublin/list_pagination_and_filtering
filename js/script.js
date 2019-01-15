@@ -61,11 +61,12 @@ appendPageLinks ();
 // Add students to page function
 const showPage = () => {
   const studentNames = document.querySelectorAll('.student-details h3');
+  const studentEmails = document.querySelectorAll('.student-details .email');
   const studentJoinDates = document.querySelectorAll('.date');
   userInput = searchInput.value.toLowerCase();
 
   for (let i = 0; i < allStudents.length; i++) {
-    if (studentNames[i].innerText.includes(userInput) || studentJoinDates[i].innerText.includes(userInput)) {
+    if (studentNames[i].innerText.includes(userInput) || studentEmails[i].innerText.includes(userInput) || studentJoinDates[i].innerText.includes(userInput)) {
       allStudents[i].classList.add('visible')
     } else if (allStudents[i].classList.contains('visible')) {
       allStudents[i].classList.remove('visible')
