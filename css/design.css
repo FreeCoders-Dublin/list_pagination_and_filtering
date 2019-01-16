@@ -121,3 +121,7 @@ body{
   .hide {
     display: none;
   }
+
+  .highlight {
+    background-color = blue;
+  }

@@ -27,6 +27,11 @@ errorMessage.innerText = 'No students found under your criteria';
 errorMessage.style.display = 'none';
 divPage.appendChild(errorMessage);
 
+
+// Creation of Highlight span
+let highlightSpan = document.createElement ('span');
+highlightSpan.classList.add('highlight');
+
 // Page Link Creation
 const appendPageLinks = () => {
   pageList = document.createElement('ol');
@@ -43,6 +48,7 @@ const appendPageLinks = () => {
     pageButton.appendChild(pageLink);
     pageList.appendChild(pageButton);
   }
+
   pageList.addEventListener ('click', (event) => {
     if (event.target.tagName === 'A') {
       pageList.querySelectorAll('a')
@@ -70,7 +76,9 @@ const showPage = () => {
   for (let i = 0; i < allStudents.length; i++) {
     if (studentNames[i].innerText.includes(userInput) || studentJoinDates[i].innerText.includes(userInput)) {
       allStudents[i].classList.add('visible');
-      studentNames[i].innerText.indexOf(userInput);
+      highlightSpan = `<span class="highlight">${userInput}</span>`;
+      highlightSpan = studentNames[i].innerHTML.replace(userInput, highlightSpan);
+      studentNames[i].innerHTML = highlightSpan;
     } else if (allStudents[i].classList.contains('visible')) {
       allStudents[i].classList.remove('visible')
     }
