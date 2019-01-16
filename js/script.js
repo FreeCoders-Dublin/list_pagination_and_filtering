@@ -4,7 +4,6 @@ FSJS project 2 - List Filter and Pagination
 ******************************************/
 
 const studentsList = document.querySelectorAll('.student-item');
-const numberPages =  Math.ceil((studentsList.length) / 10);
 
 // input: int, array[node] - output: none - functionality: it hides {students} not in the {page}.
 const showPage = (page, students) => {
@@ -19,8 +18,9 @@ const showPage = (page, students) => {
   });
 };
 
-// input: int - output: none - functionality: it creates a button for any {pages}.
-const appendPageLinks = (pages, studentsList) => {
+// input: Array - output: none - functionality: it creates a button for any ten {studentslist}.
+const appendPageLinks = (studentsList) => {
+  pages = Math.ceil((studentsList.length) / 10);
   if(document.querySelector('.pagination')) {
     var select = document.querySelector('.pagination');
     select.parentNode.removeChild(select);
@@ -45,75 +45,39 @@ const appendPageLinks = (pages, studentsList) => {
   ));
 }
 
-
-const searchUsers = () => {
-  document.querySelector('button').addEventListener('click',() => {
-    let inputValue = document.querySelector('input').value;
-    let studentsMatching = [];
-    studentsList.forEach((student) => {
-      if(student.querySelector('h3').innerText.includes(inputValue)) {
-        student.style.display = '';
-        studentsMatching.push(student);
-      } else {
-        student.style.display = 'none';
-      }
-    });
-    if(studentsMatching.length === 0) {
-      // check if the element doesn't exist
-      if(!document.querySelector('.message')) {
-        // create element
-        let message = document.createElement("div");
-        message.className = 'message';
-        message.innerHTML = `<h2>No Results</h2>`;
-        document.querySelector('ul').appendChild(message);
-        appendPageLinks(Math.ceil((studentsMatching.length) / 10), studentsMatching);
-      }
+const search = () => {
+  let inputValue = document.querySelector('input').value;
+  let studentsMatching = [];
+  studentsList.forEach((student) => {
+    if(student.querySelector('h3').innerText.includes(inputValue)) {
+      student.style.display = '';
+      studentsMatching.push(student);
     } else {
-      // remove element
-      if(document.querySelector('.message')) {
-        document.querySelector('.message').parentNode.removeChild(document.querySelector('.message'));
-      }
-
-      showPage(1, studentsMatching);
-      appendPageLinks(Math.ceil((studentsMatching.length) / 10), studentsMatching);
-      document.querySelector('a').className = 'active';
+      student.style.display = 'none';
     }
   });
-
-  document.addEventListener('keyup',() => {
-    let inputValue = document.querySelector('input').value;
-    let studentsMatching = [];
-    studentsList.forEach((student) => {
-      if(student.querySelector('h3').innerText.includes(inputValue)) {
-        student.style.display = '';
-        studentsMatching.push(student);
-      } else {
-        student.style.display = 'none';
-      }
-    });
-    if(studentsMatching.length === 0) {
-      // check if the element doesn't exist
-      if(!document.querySelector('.message')) {
-        // create element
-        let message = document.createElement("div");
-        message.className = 'message';
-        message.innerHTML = `<h2>No Results</h2>`;
-        document.querySelector('ul').appendChild(message);
-        appendPageLinks(Math.ceil((studentsMatching.length) / 10), studentsMatching);
-      }
-    } else {
-      // remove element
-      if(document.querySelector('.message')) {
-        document.querySelector('.message').parentNode.removeChild(document.querySelector('.message'));
-      }
-
-      showPage(1, studentsMatching);
-      appendPageLinks(Math.ceil((studentsMatching.length) / 10), studentsMatching);
-      document.querySelector('a').className = 'active';
+  if(studentsMatching.length === 0) {
+    // check if the element doesn't exist
+    if(!document.querySelector('.message')) {
+      // create element
+      let message = document.createElement("div");
+      message.className = 'message';
+      message.innerHTML = `<h2>No Results</h2>`;
+      document.querySelector('ul').appendChild(message);
+      appendPageLinks(studentsMatching);
     }
-  });
+  } else {
+    // remove element
+    if(document.querySelector('.message')) {
+      document.querySelector('.message').parentNode.removeChild(document.querySelector('.message'));
+    }
 
+    showPage(1, studentsMatching);
+    appendPageLinks(studentsMatching);
+    document.querySelector('a').className = 'active';
+  }
 }
+
 // input: none - output: none - functionality: it adds an input field on the header.
 const searchInput = () => {
   let searchField = document.createElement('div');
@@ -125,11 +89,12 @@ const searchInput = () => {
 
 // input: none - output: none - functionality: it controls the program flow.
 const setUp = () => {
-  appendPageLinks(numberPages, studentsList);
+  appendPageLinks(studentsList);
   showPage(1, studentsList);
   document.querySelector('a').className = 'active';
   searchInput();
-  searchUsers();
+  document.querySelector('button').addEventListener('click',search);
+  document.addEventListener('keyup',search);
 }
 
 setUp();
