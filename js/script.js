@@ -8,7 +8,7 @@ let studentList = document.querySelector('.student-list');
 let pageList = document.querySelector('.pagination');
 const divPage = document.querySelector('div.page');
 
-// Global Varial
+// Global Variables
 let studentPages = Math.ceil(allStudents.length / 10);
 let activePage = 1;
 
@@ -19,10 +19,13 @@ const searchInput = document.createElement('input');
 searchInput.setAttribute('placeholder', 'Search for students...');
 searchBar.appendChild(searchInput);
 const header = document.querySelector('.page-header').appendChild(searchBar);
-
 let userInput = searchInput.value.toLowerCase();
 
-
+// Error message
+let errorMessage = document.createElement ('h2');
+errorMessage.innerText = 'No students found under your criteria';
+errorMessage.style.display = 'none';
+divPage.appendChild(errorMessage);
 
 // Page Link Creation
 const appendPageLinks = () => {
@@ -61,13 +64,13 @@ appendPageLinks ();
 // Add students to page function
 const showPage = () => {
   const studentNames = document.querySelectorAll('.student-details h3');
-  const studentEmails = document.querySelectorAll('.student-details .email');
   const studentJoinDates = document.querySelectorAll('.date');
   userInput = searchInput.value.toLowerCase();
 
   for (let i = 0; i < allStudents.length; i++) {
-    if (studentNames[i].innerText.includes(userInput) || studentEmails[i].innerText.includes(userInput) || studentJoinDates[i].innerText.includes(userInput)) {
-      allStudents[i].classList.add('visible')
+    if (studentNames[i].innerText.includes(userInput) || studentJoinDates[i].innerText.includes(userInput)) {
+      allStudents[i].classList.add('visible');
+      studentNames[i].innerText.indexOf(userInput);
     } else if (allStudents[i].classList.contains('visible')) {
       allStudents[i].classList.remove('visible')
     }
@@ -75,6 +78,12 @@ const showPage = () => {
   };
 
   let visibleStudents = document.querySelectorAll('li.visible');
+
+  if (visibleStudents.length === 0) {
+    errorMessage.style.display = 'block';
+  } else {
+    errorMessage.style.display = 'none';
+  }
 
   for (let i = 0; i < visibleStudents.length; i++) {
     if (i < activePage * 10 && i >= (activePage * 10) - 10) {
