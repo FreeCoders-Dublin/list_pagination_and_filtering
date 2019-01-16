@@ -58,13 +58,26 @@ const searchUsers = () => {
         student.style.display = 'none';
       }
     });
-    // if(studentsMatching.length === 0) {
-    //   document.querySelector('ul').innerHTML = "<h2> No Contact Found </h2>";
-    // } else {
+    if(studentsMatching.length === 0) {
+      // check if the element doesn't exist
+      if(!document.querySelector('.message')) {
+        // create element
+        let message = document.createElement("div");
+        message.className = 'message';
+        message.innerHTML = `<h2>No Results</h2>`;
+        document.querySelector('ul').appendChild(message);
+        appendPageLinks(Math.ceil((studentsMatching.length) / 10), studentsMatching);
+      }
+    } else {
+      // remove element
+      if(document.querySelector('.message')) {
+        document.querySelector('.message').parentNode.removeChild(document.querySelector('.message'));
+      }
+
       showPage(1, studentsMatching);
       appendPageLinks(Math.ceil((studentsMatching.length) / 10), studentsMatching);
       document.querySelector('a').className = 'active';
-    // }
+    }
   });
 
   document.addEventListener('keyup',() => {
@@ -78,13 +91,26 @@ const searchUsers = () => {
         student.style.display = 'none';
       }
     });
-    // if(studentsMatching.length === 0) {
-    //   alert('No Contact Found');
-    // } else {
+    if(studentsMatching.length === 0) {
+      // check if the element doesn't exist
+      if(!document.querySelector('.message')) {
+        // create element
+        let message = document.createElement("div");
+        message.className = 'message';
+        message.innerHTML = `<h2>No Results</h2>`;
+        document.querySelector('ul').appendChild(message);
+        appendPageLinks(Math.ceil((studentsMatching.length) / 10), studentsMatching);
+      }
+    } else {
+      // remove element
+      if(document.querySelector('.message')) {
+        document.querySelector('.message').parentNode.removeChild(document.querySelector('.message'));
+      }
+
       showPage(1, studentsMatching);
       appendPageLinks(Math.ceil((studentsMatching.length) / 10), studentsMatching);
       document.querySelector('a').className = 'active';
-    // }
+    }
   });
 
 }
