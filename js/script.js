@@ -7,6 +7,9 @@ let allStudents = document.querySelectorAll('.student-item');
 let studentList = document.querySelector('.student-list');
 let pageList = document.querySelector('.pagination');
 const divPage = document.querySelector('div.page');
+const studentNames = document.querySelectorAll('.student-details h3');
+const studentJoinDates = document.querySelectorAll('.date');
+
 
 // Global Variables
 let studentPages = Math.ceil(allStudents.length / 10);
@@ -19,7 +22,7 @@ const searchInput = document.createElement('input');
 searchInput.setAttribute('placeholder', 'Search for students...');
 searchBar.appendChild(searchInput);
 const header = document.querySelector('.page-header').appendChild(searchBar);
-let userInput = searchInput.value.toLowerCase();
+var userInput = searchInput.value.toLowerCase();
 
 // Error message
 let errorMessage = document.createElement ('h2');
@@ -69,20 +72,16 @@ appendPageLinks ();
 
 // Add students to page function
 const showPage = () => {
-  const studentNames = document.querySelectorAll('.student-details h3');
-  const studentJoinDates = document.querySelectorAll('.date');
-  userInput = searchInput.value.toLowerCase();
+  let userInput = searchInput.value.toLowerCase();
 
   for (let i = 0; i < allStudents.length; i++) {
+  	allStudents[i].style.display = 'none';
+  	if (allStudents[i].classList.contains('visible')) {
+  	allStudents[i].classList.remove('visible');
+    }
     if (studentNames[i].innerText.includes(userInput) || studentJoinDates[i].innerText.includes(userInput)) {
       allStudents[i].classList.add('visible');
-      highlightSpan = `<span class="highlight">${userInput}</span>`;
-      highlightSpan = studentNames[i].innerHTML.replace(userInput, highlightSpan);
-      studentNames[i].innerHTML = highlightSpan;
-    } else if (allStudents[i].classList.contains('visible')) {
-      allStudents[i].classList.remove('visible')
     }
-    allStudents[i].style.display = 'none';
   };
 
   let visibleStudents = document.querySelectorAll('li.visible');
