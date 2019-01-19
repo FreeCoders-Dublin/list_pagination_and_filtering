@@ -16,7 +16,7 @@ let numberPages = Math.ceil((studentList.length) / 10);
 
 function showPage(visiblePage) {
    for (i=0; i <studentList.length; i++) {
-      if (i < visiblePage * 10 && i >= (visiblePage * 10) - 10) {
+      if (i >= (visiblePage * 10) - 10 && i < visiblePage * 10) {
       studentList[i].style.display = '';
    }  else {
       studentList[i].style.display = 'none';
