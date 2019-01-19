@@ -26,18 +26,11 @@ const errorMessage = document.createElement ('h2');
 errorMessage.innerText = 'No students match your criteria :-(';
 errorMessage.style.display = 'none';
 divPage.appendChild(errorMessage);
-/// Adds event listener to search input
-searchInput.addEventListener ('keyup', () => {
-    activePage = 1;
-    showPage ();
-    divPage.removeChild(pageList);
-    appendPageLinks ();
-}, false);
 
 /***** Shows students on each page *****/
 const showPage = () => {
 // Checks the input
-  let userInput = searchInput.value.toLowerCase();
+  userInput = searchInput.value.toLowerCase();
 // Adds class visibile to students matching search
   for (let i = 0; i < allStudents.length; i++) {
   	allStudents[i].style.display = 'none';
@@ -72,7 +65,7 @@ showPage ();
 
 /***** Page list with links *****/
 const appendPageLinks = () => {
-  let pageList = document.createElement('ol');
+  pageList = document.createElement('ol');
   pageList.classList.add('pagination');
 // Creates amount of pages based on number of students
   for (let i = 0; i < studentPages; i++){
@@ -98,9 +91,17 @@ const appendPageLinks = () => {
       showPage();
     }
   }, false);
-// Appends child to the div to then be removed everytime you search
+// Appends child to the div Page
   divPage.appendChild(pageList);
 };
 
 /***** Appends Pages on first page load *****/
 appendPageLinks ();
+
+/// Adds event listener to search input
+searchInput.addEventListener ('keyup', () => {
+    activePage = 1;
+    showPage ();
+    divPage.removeChild(pageList);
+    appendPageLinks ();
+}, false);
