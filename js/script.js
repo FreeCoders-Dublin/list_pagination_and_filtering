@@ -10,9 +10,9 @@ const allStudents = document.querySelectorAll('.student-item');
 const studentNames = document.querySelectorAll('.student-details h3');
 const studentJoinDates = document.querySelectorAll('.date');
 
-/***** Initial page *****/
-let studentPages = Math.ceil(allStudents.length / 10);
-let activePage = 1;
+/***** Global Variables *****/
+let studentPages;
+let activePage;
 
 /***** Dynamic search engine as you type *****/
 const searchBar = document.createElement ('div');
@@ -45,14 +45,14 @@ const showPage = () => {
   let visibleStudents = document.querySelectorAll('li.visible');
 // Display error message if there are no students matching search
   if (visibleStudents.length === 0) {
-    errorMessage.style.display = 'block';
+    errorMessage.style.display = '';
   } else {
     errorMessage.style.display = 'none';
   }
 // With the new index of visibile, it displays users according to activePage
   for (let i = 0; i < visibleStudents.length; i++) {
     if (i >= (activePage * 10) - 10 && i < activePage * 10) {
-      visibleStudents[i].style.display = 'block';
+      visibleStudents[i].style.display = '';
       visibleStudents[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
     }
   };
@@ -60,12 +60,8 @@ const showPage = () => {
   studentPages = Math.ceil(visibleStudents.length / 10);
 };
 
-/***** Shows Page on page load, since input is '' then it shows them all *****/
-
-
-
 /***** Page list with links *****/
-let pageList;
+var pageList;
 const appendPageLinks = () => {
   pageList = document.createElement('ol');
   pageList.classList.add('pagination');
@@ -97,13 +93,14 @@ const appendPageLinks = () => {
   divPage.appendChild(pageList);
 };
 
-/***** Appends Pages on first page load *****/
-
-
+/***** Order of functions *****/
 const programFlow = () => {
+studentPages = Math.ceil(allStudents.length / 10);
+activePage = 1;
 showPage ();
 appendPageLinks ();
 }
+programFlow();
 
 /// Adds event listener to search input
 searchInput.addEventListener ('keyup', () => {
