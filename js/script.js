@@ -61,9 +61,11 @@ const showPage = () => {
 };
 
 /***** Shows Page on page load, since input is '' then it shows them all *****/
-showPage ();
+
+
 
 /***** Page list with links *****/
+let pageList;
 const appendPageLinks = () => {
   pageList = document.createElement('ol');
   pageList.classList.add('pagination');
@@ -96,7 +98,12 @@ const appendPageLinks = () => {
 };
 
 /***** Appends Pages on first page load *****/
+
+
+const programFlow = () => {
+showPage ();
 appendPageLinks ();
+}
 
 /// Adds event listener to search input
 searchInput.addEventListener ('keyup', () => {
