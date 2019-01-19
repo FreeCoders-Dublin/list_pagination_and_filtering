@@ -84,14 +84,6 @@ const showPage = () => {
     }
     if (studentNames[i].innerText.includes(userInput) || studentJoinDates[i].innerText.includes(userInput)) {
       allStudents[i].classList.add('visible');
-<<<<<<< HEAD
-      // highlightSpan = `<span class="highlight">${userInput}</span>`;
-      // highlightSpan = studentNames[i].innerHTML.replace(userInput, highlightSpan);
-      // studentNames[i].innerHTML = highlightSpan;
-    } else if (allStudents[i].classList.contains('visible')) {
-      allStudents[i].classList.remove('visible')
-=======
->>>>>>> a49ad6c069a99a98f4fe9e4c4319f7d24ac3e36b
     }
   };
 
