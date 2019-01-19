@@ -34,16 +34,12 @@ document.querySelector('.page').appendChild(listBottom);
 const linksPagination = document.querySelectorAll('.pagination a');
 
 
-
-10 
-
-
-
+   
 
 const showPage = (list, page) => {
   //loop over the list parameter
   for(let i = 0; i < list.length; i++) {
-    if (i > page * 10 && i < (page * 10) - 10) {
+    if (i > (page * 10) - 1) {
       allItems[i].classList.add('hide');
     }
   } 
@@ -65,7 +61,7 @@ linksPagination[0].classList.add('active');
    //richiamo la funzione showpage con i come parametro
    let currentPage = (i + 1); 
    console.log(currentPage);
-   
+   showPage(allItems, currentPage);
  });
 }
 
