@@ -51,7 +51,7 @@ const showPage = () => {
   }
 // With the new index of visibile, it displays users according to activePage
   for (let i = 0; i < visibleStudents.length; i++) {
-    if (i < activePage * 10 && i >= (activePage * 10) - 10) {
+    if (i >= (activePage * 10) - 10 && i < activePage * 10) {
       visibleStudents[i].style.display = 'block';
       visibleStudents[i].querySelector('.student-details h3').style.textTransform = 'capitalize';
     }
