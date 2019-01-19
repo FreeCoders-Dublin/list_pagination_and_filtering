@@ -20,7 +20,7 @@ const showPage = (page, students) => {
 
 // input: Array - output: none - functionality: it creates a button for any ten {studentslist}.
 const appendPageLinks = (studentsList) => {
-  pages = Math.ceil((studentsList.length) / 10);
+  let pages = Math.ceil((studentsList.length) / 10);
   if(document.querySelector('.pagination')) {
     var select = document.querySelector('.pagination');
     select.parentNode.removeChild(select);
