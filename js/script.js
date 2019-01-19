@@ -39,14 +39,13 @@ const linksPagination = document.querySelectorAll('.pagination a');
 const showPage = (list, page) => {
   //loop over the list parameter
   for(let i = 0; i < list.length; i++) {
-
+allItems[i].classList.remove('hide');
     if (i > (page * 10) - 1 || i < (page * 10) - 10) {
       
       allItems[i].classList.add('hide');
     }
   } 
 }
-
 
 
 for(let i = 0; i < linksPagination.length; i++) {
@@ -63,7 +62,7 @@ showPage(allItems, 1);
    linksPagination[i].classList.add('active');  
    //richiamo la funzione showpage con i come parametro
    let currentPage = (i + 1); 
-   console.log(currentPage);
+   console.log(allItems);
    showPage(allItems, currentPage);
  });
 }
