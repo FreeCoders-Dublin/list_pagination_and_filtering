@@ -76,9 +76,9 @@ const showPage = () => {
   for (let i = 0; i < allStudents.length; i++) {
     if (studentNames[i].innerText.includes(userInput) || studentJoinDates[i].innerText.includes(userInput)) {
       allStudents[i].classList.add('visible');
-      highlightSpan = `<span class="highlight">${userInput}</span>`;
-      highlightSpan = studentNames[i].innerHTML.replace(userInput, highlightSpan);
-      studentNames[i].innerHTML = highlightSpan;
+      // highlightSpan = `<span class="highlight">${userInput}</span>`;
+      // highlightSpan = studentNames[i].innerHTML.replace(userInput, highlightSpan);
+      // studentNames[i].innerHTML = highlightSpan;
     } else if (allStudents[i].classList.contains('visible')) {
       allStudents[i].classList.remove('visible')
     }
