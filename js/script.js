@@ -39,16 +39,19 @@ const linksPagination = document.querySelectorAll('.pagination a');
 const showPage = (list, page) => {
   //loop over the list parameter
   for(let i = 0; i < list.length; i++) {
-    if (i > (page * 10) - 1) {
+
+    if (i > (page * 10) - 1 && i < (page * 10) - 10) {
+      console.log(i);
       allItems[i].classList.add('hide');
     }
   } 
 }
 
 
+showPage(allItems, 1);
+
 for(let i = 0; i < linksPagination.length; i++) {
 //aggiungo la classe active al primo on page load 
-showPage(allItems, 1);
 linksPagination[0].classList.add('active');
 //quando clikko su un pulsante
  linksPagination[i].addEventListener('click', ()=>{
