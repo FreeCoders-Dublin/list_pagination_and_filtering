@@ -40,19 +40,19 @@ const showPage = (list, page) => {
   //loop over the list parameter
   for(let i = 0; i < list.length; i++) {
 
-    if (i > (page * 10) - 1 && i < (page * 10) - 10) {
-      console.log(i);
+    if (i > (page * 10) - 1 || i < (page * 10) - 10) {
+      
       allItems[i].classList.add('hide');
     }
   } 
 }
 
 
-showPage(allItems, 1);
 
 for(let i = 0; i < linksPagination.length; i++) {
 //aggiungo la classe active al primo on page load 
 linksPagination[0].classList.add('active');
+showPage(allItems, 1);
 //quando clikko su un pulsante
  linksPagination[i].addEventListener('click', ()=>{
       //rimuovo active da tutti  
